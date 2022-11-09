@@ -24,17 +24,16 @@ class Login extends React.Component {
     this.setState({ [name]: value }, this.activeButton);
   };
 
-
   settingsPage = () => {
     const { history } = this.props;
     history.push('/configuracoes');
+  };
 
   BtnClick = async () => {
     const { history } = this.props;
     const token = await getToken();
     localStorage.setItem('token', token);
     history.push('/game');
-
   };
 
   render() {
@@ -55,7 +54,7 @@ class Login extends React.Component {
           name="email"
           data-testid="input-gravatar-email"
         />
-        
+
         <button
           disabled={ disable }
           data-testid="btn-play"
@@ -64,7 +63,7 @@ class Login extends React.Component {
         >
           Play
         </button>
-     
+
         <button
           type="button"
           data-testid="btn-settings"
@@ -73,7 +72,6 @@ class Login extends React.Component {
           Settings
         </button>
 
-        
       </>
     );
   }
@@ -86,4 +84,3 @@ Login.propTypes = {
 };
 
 export default connect()(Login);
-
