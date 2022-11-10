@@ -1,4 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import getToken from '../services/Api';
+import { savePlayer } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -19,6 +23,21 @@ class Login extends React.Component {
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value }, this.activeButton);
+  };
+
+  settingsPage = () => {
+    const { history } = this.props;
+    history.push('/configuracoes');
+  };
+
+  BtnClick = async () => {
+    const { history, dispatch } = this.props;
+    const { name, email } = this.state;
+    const infoPlayer = { name, email };
+    dispatch(savePlayer(infoPlayer));
+    const token = await getToken();
+    localStorage.setItem('token', token);
+    history.push('/game');
   };
 
   render() {
@@ -47,10 +66,32 @@ class Login extends React.Component {
             data-testid="input-gravatar-email"
           />
         </label>
-        <button disabled={ disable } data-testid="btn-play" type="button">Play</button>
+        <button
+          disabled={ disable }
+          data-testid="btn-play"
+          type="button"
+          onClick={ this.BtnClick }
+        >
+          Play
+        </button>
+
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.settingsPage }
+        >
+          Settings
+        </button>
       </>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Login);

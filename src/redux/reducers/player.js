@@ -10,6 +10,7 @@ const INIT_STATE = {
 const player = (state = INIT_STATE, action) => {
   switch (action.type) {
   case SAVE_PLAYER:
+    console.log(action);
     return {
       ...state,
       name: action.payload.name,
