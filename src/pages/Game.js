@@ -44,6 +44,16 @@ class Game extends React.Component {
     this.setState({ guess: bool });
   };
 
+  handleNext = () => {
+    const { index, questions } = this.state;
+    this.setState({ index: index + 1, guess: false }, () => {
+      const { index: newIndex } = this.state;
+      if (newIndex === questions.length) {
+        this.setState({ index: 0 });
+      }
+    });
+  };
+
   render() {
     const { questions, index, guess, answers } = this.state;
 
@@ -82,21 +92,16 @@ class Game extends React.Component {
 
             return null;
           })}
+          { guess ? (
+            <button
+              data-testid="btn-next"
+              type="button"
+              onClick={ this.handleNext }
+            >
+              Next
 
-          <button
-            type="button"
-            onClick={ () => {
-              this.setState({ index: index + 1, guess: false }, () => {
-                const { index: newIndex } = this.state;
-                if (newIndex === questions.length) {
-                  this.setState({ index: 0 });
-                }
-              });
-            } }
-          >
-            Next
-
-          </button>
+            </button>)
+            : ''}
         </div>
       </main>
     );
