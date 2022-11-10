@@ -44,21 +44,28 @@ class Login extends React.Component {
     const { name, email, disable } = this.state;
     return (
       <>
-        <input
-          onChange={ this.handleChange }
-          name="name"
-          type="text"
-          value={ name }
-          data-testid="input-player-name"
-        />
-        <input
-          value={ email }
-          onChange={ this.handleChange }
-          type="email"
-          name="email"
-          data-testid="input-gravatar-email"
-        />
-
+        <label htmlFor="input-name">
+          Nome
+          <input
+            id="input-name"
+            onChange={ this.handleChange }
+            name="name"
+            type="text"
+            value={ name }
+            data-testid="input-player-name"
+          />
+        </label>
+        <label htmlFor="input-email">
+          E-mail
+          <input
+            id="input-email"
+            value={ email }
+            onChange={ this.handleChange }
+            type="email"
+            name="email"
+            data-testid="input-gravatar-email"
+          />
+        </label>
         <button
           disabled={ disable }
           data-testid="btn-play"
@@ -75,7 +82,6 @@ class Login extends React.Component {
         >
           Settings
         </button>
-
       </>
     );
   }
