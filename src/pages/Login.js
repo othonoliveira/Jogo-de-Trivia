@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import getToken from '../services/Api';
 import { savePlayer } from '../redux/actions';
+import { getToken } from '../services/Api';
 
 class Login extends React.Component {
   state = {
