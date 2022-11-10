@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Header from '../component/Header';
 import { fetchAPI } from '../services/Api';
-
-import '../App.css';
 
 class Game extends React.Component {
   constructor() {
@@ -36,7 +35,7 @@ class Game extends React.Component {
 
     return (
       <main>
-        <h1>Game</h1>
+        <Header />
         <div>
           {questions.map((q, i) => {
             if (i === index) {
