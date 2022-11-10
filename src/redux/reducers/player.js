@@ -10,16 +10,12 @@ const INIT_STATE = {
 const player = (state = INIT_STATE, action) => {
   switch (action.type) {
   case SAVE_PLAYER:
+    console.log(action);
     return {
       ...state,
       name: action.payload.name,
-      gravatarEmail: action.payload.gravatarEmail,
+      gravatarEmail: action.payload.email,
     };
-  // case GRAVATAR_IMG:
-  //   return {
-  //     ...state,
-  //     gravatarImg: action.payload.gravatarImg,
-  //   };
   default:
     return state;
   }
