@@ -18,11 +18,12 @@ class Game extends React.Component {
 
   async componentDidMount() {
     const { history } = this.props;
+    const FIVE = 5;
 
     const QUANTITY = 5;
     const questions = await fetchAPI(QUANTITY);
 
-    questions.forEach((q) => {
+    questions.slice(0, FIVE).forEach((q) => {
       const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = q;
       const answers = this.randomizeAnswers([...incorrectAnswers, correctAnswer]);
       this.setState((prevState) => ({ answers: [...prevState.answers, answers] }));
@@ -45,11 +46,12 @@ class Game extends React.Component {
   };
 
   handleNext = () => {
+    const { history } = this.props;
     const { index, questions } = this.state;
     this.setState({ index: index + 1, guess: false }, () => {
       const { index: newIndex } = this.state;
       if (newIndex === questions.length) {
-        this.setState({ index: 0 });
+        history.push('/feedbacks');
       }
     });
   };
