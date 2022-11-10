@@ -26,14 +26,11 @@
 }
 
 .option {
-  background: white;
+  background: lightgray;
   border: 1px solid white;
   border-radius: 100px;
   box-sizing: border-box;
   height: 64px;
-  left: 661px;
-  position: absolute;
-  top: 228px;
   width: 519px;
 }
 
