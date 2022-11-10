@@ -39,7 +39,18 @@ class Login extends React.Component {
           name="email"
           data-testid="input-gravatar-email"
         />
-        <button disabled={ disable } data-testid="btn-play" type="button">Play</button>
+        <button
+          disabled={ disable }
+          data-testid="btn-play"
+          type="button"
+          onClick={ () => {
+            const { history } = this.props;
+            history.push('/game');
+          } }
+        >
+          Play
+
+        </button>
       </>
     );
   }

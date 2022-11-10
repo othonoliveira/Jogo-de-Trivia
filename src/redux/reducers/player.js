@@ -13,8 +13,13 @@ const player = (state = INIT_STATE, action) => {
     return {
       ...state,
       name: action.payload.name,
-      gravatarEmail: action.payload.email,
+      gravatarEmail: action.payload.gravatarEmail,
     };
+  // case GRAVATAR_IMG:
+  //   return {
+  //     ...state,
+  //     gravatarImg: action.payload.gravatarImg,
+  //   };
   default:
     return state;
   }
