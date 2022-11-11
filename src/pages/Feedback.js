@@ -6,7 +6,7 @@ import Header from '../component/Header';
 // pontuação atual: player.score
 // perguntas: assertions
 
-class Feedbacks extends React.Component {
+class Feedback extends React.Component {
   handleClick = () => {
     const { history } = this.props;
     history.push('/');
@@ -19,10 +19,15 @@ class Feedbacks extends React.Component {
 
   render() {
     const { score, assertions } = this.props;
+    const THREE = 3;
     return (
       <>
         <Header />
-        <p data-testid="feedback-text">Default</p>
+        { assertions < THREE ? (
+          <p data-testid="feedback-text">Could be better...</p>
+        ) : (
+          <p data-testid="feedback-text">Well Done!</p>
+        )}
 
         <div className="player-results">
           <h4 data-testid="feedback-total-score">
@@ -57,10 +62,10 @@ const mapStateToProps = (globalState) => ({
   assertions: globalState.player.assertions,
 });
 
-Feedbacks.propTypes = {
+Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
   history: PropTypes.shape().isRequired,
 };
 
-export default connect(mapStateToProps)(Feedbacks);
+export default connect(mapStateToProps)(Feedback);
