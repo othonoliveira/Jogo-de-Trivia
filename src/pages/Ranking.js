@@ -11,9 +11,8 @@ class Ranking extends React.Component {
   render() {
     return (
       <div>
-        <title data-testid="ranking-title">
-          Ranking
-        </title>
+        <title data-testid="ranking-title"> Ranking </title>
+        <h1>Ranking</h1>
         <button
           data-testid="btn-go-home"
           onClick={ this.handleClick }
