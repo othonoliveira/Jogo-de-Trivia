@@ -90,11 +90,11 @@ class Game extends React.Component {
 
   getScore = () => {
     const { index, questions, count } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, prevScore } = this.props;
     const { difficulty } = questions[index];
     const TEN = 10;
 
-    const score = TEN + (count * this.getDifficults(difficulty));
+    const score = (TEN + (count * this.getDifficults(difficulty))) + prevScore;
     dispatch(savePoints(score));
   };
 
@@ -157,14 +157,16 @@ class Game extends React.Component {
   }
 }
 
+const mapStateToProps = (globalState) => ({
+  prevScore: globalState.player.score,
+  settings: globalState.settings,
+});
+
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   dispatch: PropTypes.func.isRequired,
   settings: PropTypes.instanceOf(Object).isRequired,
+  prevScore: PropTypes.number.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  settings: state.settings,
-});
 
 export default connect(mapStateToProps)(Game);
