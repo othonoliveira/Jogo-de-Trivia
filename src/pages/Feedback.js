@@ -1,12 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Header from '../component/Header';
 
 // pontuação atual: player.score
 // perguntas: assertions
 
 class Feedbacks extends React.Component {
+  handleClick = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   render() {
     const { score, assertions } = this.props;
     return (
@@ -22,6 +27,14 @@ class Feedbacks extends React.Component {
             { assertions }
           </h4>
         </div>
+
+        <button
+          onClick={ this.handleClick }
+          type="button"
+          data-testid="btn-play-again"
+        >
+          Play Again
+        </button>
       </>
     );
   }
@@ -34,6 +47,7 @@ const mapStateToProps = (globalState) => ({
 Feedbacks.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps)(Feedbacks);
