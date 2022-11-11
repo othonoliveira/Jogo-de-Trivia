@@ -63,4 +63,4 @@ Feedbacks.propTypes = {
   history: PropTypes.shape().isRequired,
 };
 
-export default connect(mapStateToProps)(Feedbacks);
+export default connect(mapStateToProps)(Feedback);
