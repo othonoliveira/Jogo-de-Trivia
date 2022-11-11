@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from '../component/Header';
 import { fetchAPI } from '../services/Api';
 
@@ -20,11 +21,11 @@ class Game extends React.Component {
   }
 
   async componentDidMount() {
-    const { history } = this.props;
+    const { history, settings } = this.props;
     const FIVE = 5;
 
     const QUANTITY = 5;
-    const questions = await fetchAPI(QUANTITY);
+    const questions = await fetchAPI(QUANTITY, settings);
 
     questions.slice(0, FIVE).forEach((q) => {
       const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = q;
@@ -149,6 +150,11 @@ class Game extends React.Component {
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  settings: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default Game;
+const mapStateToProps = (state) => ({
+  settings: state.settings,
+});
+
+export default connect(mapStateToProps)(Game);

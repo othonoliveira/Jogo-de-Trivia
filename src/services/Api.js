@@ -6,10 +6,24 @@ export const getToken = async () => {
   return response.token;
 };
 
-export const fetchAPI = async (amount) => {
+export const fetchAPI = async (amount, settings) => {
+  const { category, difficulty, type } = settings;
+
   const token = localStorage.getItem('token');
 
-  const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&token=${token}`);
+  let URL = `https://opentdb.com/api.php?amount=${amount}&token=${token}`;
+
+  if (category) URL += `&category=${category}`;
+  if (difficulty) URL += `&difficulty=${difficulty}`;
+  if (type) URL += `&type=${type}`;
+
+  const response = await fetch(URL);
   const { results } = await response.json();
   return results;
+};
+
+export const fetchCategories = async () => {
+  const response = await fetch('https://opentdb.com/api_category.php');
+  const { trivia_categories: categories } = await response.json();
+  return categories;
 };
