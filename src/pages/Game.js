@@ -132,7 +132,7 @@ class Game extends React.Component {
 
             return null;
           })}
-          { guess ? (
+          { guess && (
             <button
               data-testid="btn-next"
               type="button"
@@ -140,17 +140,7 @@ class Game extends React.Component {
             >
               Next
 
-            </button>)
-            : ''}
-
-          {/* <button
-            data-testid="btn-next"
-            type="button"
-            onClick={ this.handleNext }
-          >
-            Next
-
-          </button> */}
+            </button>)}
         </div>
       </main>
     );
