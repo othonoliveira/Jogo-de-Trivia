@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from '../component/Header';
+import { savePoints } from '../redux/actions';
 import { fetchAPI } from '../services/Api';
 
 import './css/Game.css';
@@ -14,7 +16,6 @@ class Game extends React.Component {
       index: 0,
       guess: false,
       count: 30,
-      score: 0,
       disabled: false,
     };
   }
@@ -41,9 +42,11 @@ class Game extends React.Component {
   }
 
   counter = () => {
-    const { count } = this.state;
+    const { count, guess } = this.state;
     if (count === 0) {
       this.setState({ disabled: true, count: 30, guess: true });
+    } else if (guess) {
+      this.setState({ count });
     } else {
       this.setState((prevState) => ({ count: prevState.count - 1 }));
     }
@@ -58,24 +61,17 @@ class Game extends React.Component {
 
   onGuessHandler = (bool, value) => {
     const { questions, index } = this.state;
-    this.setState({ guess: bool });
+    this.setState({ disabled: true, guess: bool });
 
     if (value === questions[index].correct_answer) {
-      const SCORE = 10;
-      this.setState((prevState) => ({ score: prevState.score + SCORE }));
+      this.getScore();
     }
-
-    this.setState({ count: 3 });
-    const THREE_SECONDS = 3000;
-    setTimeout(() => {
-      this.handleNext();
-    }, THREE_SECONDS);
   };
 
   handleNext = () => {
     const { history } = this.props;
     const { index, questions } = this.state;
-    this.setState({ index: index + 1, guess: false, count: 30 }, () => {
+    this.setState({ disabled: false, index: index + 1, guess: false, count: 30 }, () => {
       const { index: newIndex } = this.state;
       if (newIndex === questions.length) {
         history.push('/feedbacks');
@@ -83,18 +79,32 @@ class Game extends React.Component {
     });
   };
 
+  getDifficults = (difficulty) => {
+    const HARD = 3;
+    const MEDIUM = 2;
+    const EASY = 1;
+    if (difficulty === 'hard') return HARD;
+    if (difficulty === 'medium') return MEDIUM;
+    if (difficulty === 'easy') return EASY;
+  };
+
+  getScore = () => {
+    const { index, questions, count } = this.state;
+    const { dispatch } = this.props;
+    const { difficulty } = questions[index];
+    const TEN = 10;
+
+    const score = TEN + (count * this.getDifficults(difficulty));
+    dispatch(savePoints(score));
+  };
+
   render() {
-    const { questions, index, guess, answers, count, score, disabled } = this.state;
+    const { questions, index, guess, answers, count, disabled } = this.state;
 
     return (
       <main>
         <Header />
         <div>
-          <p>
-            Score:
-            {' '}
-            {score}
-          </p>
           <p>
             Timer:
             {' '}
@@ -149,6 +159,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect()(Game);
