@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { savePlayer } from '../redux/actions';
+import { getCategories, savePlayer } from '../redux/actions';
 import { getToken } from '../services/Api';
 
 class Login extends React.Component {
@@ -10,6 +10,11 @@ class Login extends React.Component {
     email: '',
     disable: true,
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(getCategories());
+  }
 
   activeButton = () => {
     const { name, email } = this.state;
