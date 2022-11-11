@@ -20,6 +20,7 @@ class Feedback extends React.Component {
   render() {
     const { score, assertions } = this.props;
     const THREE = 3;
+
     return (
       <>
         <Header />
