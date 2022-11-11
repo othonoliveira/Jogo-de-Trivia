@@ -6,7 +6,7 @@ import Header from '../component/Header';
 // pontuação atual: player.score
 // perguntas: assertions
 
-class Feedbacks extends React.Component {
+class Feedback extends React.Component {
   handleClick = () => {
     const { history } = this.props;
     history.push('/');
@@ -57,10 +57,10 @@ const mapStateToProps = (globalState) => ({
   assertions: globalState.player.assertions,
 });
 
-Feedbacks.propTypes = {
+Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
   history: PropTypes.shape().isRequired,
 };
 
-export default connect(mapStateToProps)(Feedbacks);
+export default connect(mapStateToProps)(Feedback);
