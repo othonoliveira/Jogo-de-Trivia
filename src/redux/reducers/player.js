@@ -19,8 +19,8 @@ const player = (state = INIT_STATE, action) => {
   case SAVE_POINTS:
     return {
       ...state,
-      score: action.payload,
-      // assertions: action.payload.assertions,
+      score: action.payload.score,
+      assertions: action.payload.assertions,
     };
   default:
     return state;
