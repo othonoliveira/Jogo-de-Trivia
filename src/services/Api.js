@@ -19,6 +19,7 @@ export const fetchAPI = async (amount, settings) => {
 
   const response = await fetch(URL);
   const { results } = await response.json();
+  console.log(results);
   return results;
 };
 
