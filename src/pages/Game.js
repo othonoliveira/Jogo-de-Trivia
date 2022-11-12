@@ -21,11 +21,11 @@ class Game extends React.Component {
   }
 
   async componentDidMount() {
-    const { history } = this.props;
+    const { history, settings } = this.props;
     const FIVE = 5;
 
     const QUANTITY = 5;
-    const questions = await fetchAPI(QUANTITY);
+    const questions = await fetchAPI(QUANTITY, settings);
 
     questions.slice(0, FIVE).forEach((q) => {
       const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = q;
@@ -159,12 +159,14 @@ class Game extends React.Component {
 
 const mapStateToProps = (globalState) => ({
   prevScore: globalState.player.score,
+  settings: globalState.settings,
   assertions: globalState.player.assertions,
 });
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  settings: PropTypes.instanceOf(Object).isRequired,
   prevScore: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
 };
