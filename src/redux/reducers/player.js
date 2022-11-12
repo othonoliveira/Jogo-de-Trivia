@@ -1,4 +1,4 @@
-import { SAVE_PLAYER, SAVE_POINTS } from '../actions';
+import { CLEAR_SCORE, SAVE_PLAYER, SAVE_POINTS } from '../actions';
 
 const INIT_STATE = {
   name: '',
@@ -21,6 +21,12 @@ const player = (state = INIT_STATE, action) => {
       ...state,
       score: action.payload.score,
       assertions: action.payload.assertions,
+    };
+  case CLEAR_SCORE:
+    return {
+      ...state,
+      assertions: 0,
+      score: 0,
     };
   default:
     return state;
