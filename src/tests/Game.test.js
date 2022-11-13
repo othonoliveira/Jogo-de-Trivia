@@ -108,20 +108,22 @@ test('Verifique se após clicar em uma resposta as outras opções são desativa
     expect(respostaCorreta).toBeDisabled();
   })
 })
- 
+   
   test('Verifique se o jogo possui 5 perguntas e se renderiza um botão para a pág.feedback', async () => {
     localStorage.setItem('token', '504150afd88547f64f5c595c0e031215a4e1400cbbc6376670dba45711b4b9d7')
     jest.spyOn(global, 'fetch');
     global.fetch.mockResolvedValue({
       json: jest.fn().mockResolvedValue(mock_test),
     });
-    renderWithRouterAndRedux(<Game />);
+   
+    const {history} = renderWithRouterAndRedux(<App />);
+    const name = screen.getByTestId('input-player-name');
+    const email = screen.getByTestId('input-gravatar-email');
+    const btnPlay = screen.getByRole('button', { name: /play/i });
+    userEvent.type(name, 'Maria Clara');
+    userEvent.type(email, 'maria@test.com');
+    userEvent.click(btnPlay);
 
-    // const { history} = renderWithRouterAndRedux(<App />);
-
-    // act(() => { history.push('/feedback'); });
-
-    // questão 1
     await waitFor (() => {
       const respostaCorreta = screen.getByTestId("correct-answer");
       expect(respostaCorreta).toBeVisible();
@@ -175,13 +177,35 @@ test('Verifique se após clicar em uma resposta as outras opções são desativa
       userEvent.click(respostaCorreta)
       const btnNext = screen.getByTestId('btn-next');
       userEvent.click(btnNext)
-    })
-    
-    // const btnNext = screen.getByTestId('btn-next');
-    // userEvent.click(btnNext)
-    // await waitForElementToBeRemoved(btnNext,{timeout: 3000})
-    // expect(history.location.pathname).toBe('/feedback');
- 
-  })
+      expect(history.location.pathname).toBe('/feedback');
+    }, 5000)
 })
+
+  test('Teste das linhas 45/51 - Contador ',async () => {
+    localStorage.setItem('token', '504150afd88547f64f5c595c0e031215a4e1400cbbc6376670dba45711b4b9d7')
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mock_test),
+    });
+    renderWithRouterAndRedux(<Game />);
+  
+    await waitFor (() => {
+      const respostaCorreta = screen.getByTestId("correct-answer");
+      expect(respostaCorreta).toBeVisible();
+      expect(screen.getAllByTestId(/wrong-answer/i)[0]).toBeInTheDocument();
+    }, 3000)
+
+    await waitFor(() =>{
+      const respostaCorreta = screen.getByTestId("correct-answer");
+      expect(respostaCorreta).not.toBeDisabled();
+      userEvent.click(respostaCorreta)
+        const btnNext = screen.getByTestId('btn-next');
+        userEvent.click(btnNext)
+        expect(respostaCorreta).toBeDisabled()
+    }, 30000)
+    
+  })
+  })
+
+
  
