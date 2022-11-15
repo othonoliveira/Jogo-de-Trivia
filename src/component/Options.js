@@ -44,7 +44,9 @@ class Options extends React.Component {
                   />
                 </div>
               )}
-              { a }
+              <div className="option-text">
+                { a }
+              </div>
             </div>
           </button>
         ))}

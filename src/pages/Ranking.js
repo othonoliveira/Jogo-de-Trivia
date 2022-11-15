@@ -1,6 +1,5 @@
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -76,9 +75,6 @@ class Ranking extends React.Component {
 
 Ranking.propTypes = {
   history: PropTypes.shape().isRequired,
-  name: PropTypes.string.isRequired,
-  gravatarEmail: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

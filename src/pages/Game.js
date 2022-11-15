@@ -127,7 +127,7 @@ class Game extends React.Component {
                     className="current-question"
                     data-testid="question-text"
                   >
-                    { q.question.replaceAll('&#039;', "'")
+                    { q.question.replaceAll('&#039;', '’')
                       .replaceAll('&quot;', '"').replaceAll('&uuml;', 'ü')
                       .replaceAll('&eacute;', 'é')
                       .replaceAll('&ecirc;', 'ê') }
