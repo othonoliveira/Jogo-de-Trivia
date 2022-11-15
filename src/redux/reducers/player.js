@@ -1,4 +1,11 @@
-import { CLEAN_PLAYER, CLEAR_SCORE, GAME_OVER, SAVE_PLAYER, SAVE_POINTS, START_GAME } from '../actions';
+import {
+  CLEAN_PLAYER,
+  CLEAR_SCORE,
+  GAME_OVER,
+  SAVE_PLAYER,
+  SAVE_POINTS,
+  START_GAME,
+} from '../actions';
 
 const INIT_STATE = {
   name: '',
