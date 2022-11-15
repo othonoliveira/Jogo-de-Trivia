@@ -1,3 +1,7 @@
+html {
+  font-family: Epilogue , sans-serif;
+}
+
 .gradient {
   align-content: center;
   background-image: linear-gradient(180deg, #3c1b7a 0%, black 100%);
@@ -12,7 +16,13 @@
   width: 100%;
 }
 
-.icon {
+.settings-icon-login {
+  color: #b5b5b5;
+  margin-left: 1200px;
+  margin-top: 40px;
+}
+
+.icon-login {
   background: #3c1b7a;
   border: 6px solid #2fc18c;
   border-radius: 100%;
@@ -22,6 +32,7 @@
   height: 180px;
   margin: auto;
   margin-bottom: 0;
+  margin-top: 0;
   width: 180px;
 }
 
@@ -105,7 +116,7 @@
   border: 1px solid rgba(147, 147, 147, 0.48);
   border-radius: 5px;
   flex-direction: column;
-  height: 40px;
+  height: 30px;
   margin: auto;
   padding: 12px 16px;
   width: 519px;
@@ -117,7 +128,7 @@
   border: 1px solid rgba(147, 147, 147, 0.48);
   border-radius: 5px;
   flex-direction: column;
-  height: 40px;
+  height: 30px;
   margin: auto;
   margin-top: 30px;
   padding: 12px 16px;
@@ -128,6 +139,9 @@
   background: #2fc18c;
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: large;
+  font-weight: 900;
   height: 45px;
   margin: auto;
   margin-bottom: 30px;

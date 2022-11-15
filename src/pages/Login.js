@@ -1,6 +1,9 @@
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import Icon from '../component/Icon';
 import { getCategories, savePlayer } from '../redux/actions';
 import { getToken } from '../services/Api';
 import './css/Login.css';
@@ -50,14 +53,14 @@ class Login extends React.Component {
     const { name, email, disable } = this.state;
     return (
       <div className="gradient">
-        <div className="icon">
-          <div className="question-marks">
-            <p className="question-sign1">?</p>
-            <p className="question-sign2">?</p>
-            <p className="question-sign3">?</p>
-          </div>
-          <h1 className="trivia-title">Trivia</h1>
-        </div>
+        <FontAwesomeIcon
+          data-testid="btn-settings"
+          onClick={ this.settingsPage }
+          icon={ solid('gear') }
+          size="2x"
+          className="settings-icon-login"
+        />
+        <Icon data="icon-login" />
         <div className="inputs-conteiner">
           <input
             className="login-input-email"
@@ -86,14 +89,6 @@ class Login extends React.Component {
           >
             Play
           </button>
-
-          {/* <button
-              type="button"
-              data-testid="btn-settings"
-              onClick={ this.settingsPage }
-            >
-              Settings
-            </button> */}
         </div>
       </div>
 

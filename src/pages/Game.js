@@ -1,7 +1,10 @@
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../component/Header';
+import Options from '../component/Options';
 import { savePoints } from '../redux/actions';
 import { fetchAPI } from '../services/Api';
 
@@ -98,61 +101,72 @@ class Game extends React.Component {
     dispatch(savePoints({ score, assertions: assertions + 1 }));
   };
 
+  settingsPage = () => {
+    const { history } = this.props;
+    history.push('/configuracoes');
+  };
+
   render() {
     const { questions, index, guess, answers, count, disabled } = this.state;
-
     return (
-      <main>
-        <Header />
-        <div>
-          <p>
-            Timer:
-            {' '}
-            {count}
-          </p>
-          {questions.map((q, i) => {
-            if (i === index) {
-              return (
-                <div key={ q.question }>
-                  <p data-testid="question-category">{ q.category }</p>
-                  <p data-testid="question-text">{ q.question }</p>
-                  <div data-testid="answer-options" className="answer-options">
-                    {answers[i].map((a, idx) => (
-                      <button
-                        key={ a }
-                        data-testid={ a === q.correct_answer
-                          ? 'correct-answer'
-                          : `wrong-answer-${idx}` }
-                        className={ `option ${guess && (
-                          a === q.correct_answer
-                            ? 'optionCorrect'
-                            : 'optionIncorrect')}` }
-                        type="button"
-                        onClick={ () => this.onGuessHandler(true, a) }
-                        disabled={ disabled }
-                      >
-                        { a }
-
-                      </button>
-                    ))}
+      <div className="gradient">
+        <Header settingsPage={ this.settingsPage } />
+        {questions.map((q, i) => {
+          if (i === index) {
+            return (
+              <div className="game" key={ q.question }>
+                <div className="question-info">
+                  <p
+                    className="question-category"
+                    data-testid="question-category"
+                  >
+                    { q.category }
+                  </p>
+                  <p
+                    className="current-question"
+                    data-testid="question-text"
+                  >
+                    { q.question }
+                  </p>
+                  <div className="timer">
+                    <FontAwesomeIcon
+                      icon={ solid('clock') }
+                      className="timer-icon"
+                    />
+                    <p className="time-counter">
+                      Timer:
+                      {' '}
+                      {count}
+                    </p>
                   </div>
                 </div>
-              );
-            }
+                <div className="buttons">
+                  <Options
+                    guess={ guess }
+                    i={ i }
+                    q={ q }
+                    disabled={ disabled }
+                    answers={ answers }
+                    onGuessHandler={ this.onGuessHandler }
+                  />
+                  <button
+                    data-testid={ guess && 'btn-next' }
+                    type="button"
+                    onClick={ this.handleNext }
+                    className="next-button"
+                    disabled={ !guess }
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            );
+          }
 
-            return null;
-          })}
-          { guess && (
-            <button
-              data-testid="btn-next"
-              type="button"
-              onClick={ this.handleNext }
-            >
-              Next
+          return null;
+        })}
+      </div>
 
-            </button>)}
-        </div>
-      </main>
     );
   }
 }

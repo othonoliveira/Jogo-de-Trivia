@@ -1,0 +1,154 @@
+.icon-feedback {
+  background: #3c1b7a;
+  border: 6px solid #2fc18c;
+  border-radius: 100%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) , inset 0 4px 35px #1f0e3f;
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  width: 160px;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-image-correct {
+  border: 4px solid #2fc18c;
+}
+
+.feedback-image-incorrect {
+  border: 4px solid #ea5d5d;
+}
+
+.feedback-image {
+  border-radius: 100%;
+  margin: auto;
+  margin-bottom: -80px;
+  width: 160px;
+}
+
+.conteiner-results-image {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.image-div {
+  margin: auto;
+  position: relative;
+}
+
+.result-label-bad {
+  color: #ea5d5d;
+}
+
+.result-label-good {
+  color: #2fc18c;
+}
+
+.result-label {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.player-results {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  margin: auto;
+  width: 400px;
+}
+
+.feedback-buttons {
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.total-score {
+  align-items: center;
+  color: gray;
+  display: flex;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  margin: auto;
+  margin-top: -10px;
+  text-align: center;
+}
+
+.total-question {
+  align-items: center;
+  color: gray;
+  display: flex;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  margin: auto;
+  margin-top: -80px;
+  text-align: center;
+}
+
+.play-again-button {
+  background: #2fc18c;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  height: 45px;
+  line-height: 150%;
+  width: 250px;
+}
+
+.ranking-button {
+  background: #00d5e2;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  height: 45px;
+  line-height: 150%;
+  width: 250px;
+}
+
+.name {
+  color: black;
+  font-size: 16px;
+  margin: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+}
+
+.header-score {
+  color: black;
+  font-size: 16px;
+  margin: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 80px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
