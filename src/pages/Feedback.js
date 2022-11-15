@@ -66,7 +66,7 @@ class Feedback extends React.Component {
               </h2>
             </div>
             <div className="total-question">
-              <p>Total de pontos:</p>
+              <p>Total de pontos: </p>
               <h2 data-testid="feedback-total-question">
                 { assertions}
               </h2>
