@@ -1,4 +1,4 @@
-import { CLEAR_SCORE, GAME_OVER, SAVE_PLAYER, SAVE_POINTS, START_GAME } from '../actions';
+import { CLEAN_PLAYER, CLEAR_SCORE, GAME_OVER, SAVE_PLAYER, SAVE_POINTS, START_GAME } from '../actions';
 
 const INIT_STATE = {
   name: '',
@@ -38,6 +38,14 @@ const player = (state = INIT_STATE, action) => {
     return {
       ...state,
       game: false,
+    };
+  case CLEAN_PLAYER:
+    return {
+      ...state,
+      name: '',
+      gravatarEmail: '',
+      assertions: 0,
+      score: 0,
     };
   default:
     return state;

@@ -8,6 +8,7 @@ export const SAVE_CATEGORIES = 'SAVE_CATEGORIES';
 export const CLEAR_SCORE = 'CLEAR_SCORE';
 export const GAME_OVER = 'GAME_OVER';
 export const START_GAME = 'START_GAME';
+export const CLEAN_PLAYER = 'CLEAN_PLAYER';
 
 // action creator
 export const savePlayer = (payload) => ({
@@ -51,4 +52,8 @@ export const gameOver = () => ({
 
 export const startGame = () => ({
   type: START_GAME,
+});
+
+export const cleanPlayer = () => ({
+  type: CLEAN_PLAYER,
 });

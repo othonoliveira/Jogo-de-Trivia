@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Icon from '../component/Icon';
-import { restartScore } from '../redux/actions';
+import { cleanPlayer, restartScore } from '../redux/actions';
 import './css/Ranking.css';
 
 class Ranking extends React.Component {
@@ -13,7 +13,9 @@ class Ranking extends React.Component {
   };
 
   async componentDidMount() {
+    const { dispatch } = this.props;
     await this.getInfo();
+    await dispatch(cleanPlayer());
   }
 
   getInfo = () => {
