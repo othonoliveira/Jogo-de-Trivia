@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Icon from '../component/Icon';
-import { getCategories, savePlayer } from '../redux/actions';
+import { gameOver, getCategories, savePlayer, startGame } from '../redux/actions';
 import { getToken } from '../services/Api';
 import './css/Login.css';
 
@@ -15,9 +15,10 @@ class Login extends React.Component {
     disable: true,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getCategories());
+    await dispatch(getCategories());
+    await dispatch(gameOver());
   }
 
   activeButton = () => {
@@ -41,6 +42,7 @@ class Login extends React.Component {
 
   BtnClick = async () => {
     const { history, dispatch } = this.props;
+    await dispatch(startGame());
     const { name, email } = this.state;
     const infoPlayer = { name, email };
     dispatch(savePlayer(infoPlayer));

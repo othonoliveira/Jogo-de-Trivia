@@ -3,12 +3,26 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Icon from '../component/Icon';
+import { gameOver } from '../redux/actions';
 import './css/Feedback.css';
 
 // pontuação atual: player.score
 // perguntas: assertions
 
 class Feedback extends React.Component {
+  state = {
+    imgGravatar: 0,
+    playersArray: [],
+  };
+
+  async componentDidMount() {
+    const { dispatch, history, name } = this.props;
+    if (name.length === 0) history.push('/');
+    await dispatch(gameOver());
+    await this.fetchGravatarImg();
+    await this.savePlayer();
+  }
+
   handleClick = () => {
     const { history } = this.props;
     history.push('/');
@@ -19,8 +33,39 @@ class Feedback extends React.Component {
     history.push('/ranking');
   };
 
+  fetchGravatarImg = async () => {
+    const { gravatarEmail } = this.props;
+    const hash = md5(gravatarEmail).toString();
+    this.setState({ imgGravatar: hash });
+  };
+
+  savePlayer = () => {
+    const { imgGravatar } = this.state;
+    const { name, score } = this.props;
+    const newPlayer = { name, score, imgGravatar };
+    if (!JSON.parse(localStorage.getItem('players'))) {
+      this.setState(
+        (prev) => (
+          { playersArray: [...prev.playersArray, newPlayer] }),
+        () => {
+          const { playersArray } = this.state;
+          localStorage.setItem('players', JSON.stringify(playersArray));
+        },
+      );
+    } else {
+      const players = JSON.parse(localStorage.getItem('players'));
+      this.setState(
+        { playersArray: [...players, newPlayer] },
+        () => {
+          const { playersArray } = this.state;
+          localStorage.setItem('players', JSON.stringify(playersArray));
+        },
+      );
+    }
+  };
+
   render() {
-    const { score, assertions, gravatarEmail, name } = this.props;
+    const { score, assertions, gravatarEmail } = this.props;
     const THREE = 3;
     const convertEmail = md5(gravatarEmail).toString();
 
@@ -39,10 +84,6 @@ class Feedback extends React.Component {
             />
           </div>
           <div className="player-results">
-            <div className="header">
-              <h1 className="name" data-testid="header-player-name">{name}</h1>
-              <p className="header-score" data-testid="header-score">{score}</p>
-            </div>
             { assertions < THREE ? (
               <p
                 className="result-label result-label-bad"
@@ -71,7 +112,6 @@ class Feedback extends React.Component {
                 { assertions}
               </h2>
             </div>
-
           </div>
         </div>
         <div className="feedback-buttons">
@@ -110,6 +150,7 @@ Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
   history: PropTypes.shape().isRequired,
   gravatarEmail: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
 };
 

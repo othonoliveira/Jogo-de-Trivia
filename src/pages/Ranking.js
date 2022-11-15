@@ -1,49 +1,25 @@
-import { MD5 } from 'crypto-js';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import Icon from '../component/Icon';
 import { restartScore } from '../redux/actions';
+import './css/Ranking.css';
 
 class Ranking extends React.Component {
   state = {
-    imgGravatar: 0,
     playersArray: [],
   };
 
-  componentDidMount() {
-    this.fetchGravatarImg();
-    this.savePlayer();
+  async componentDidMount() {
+    await this.getInfo();
   }
 
-  fetchGravatarImg = () => {
-    const { gravatarEmail } = this.props;
-    const hash = MD5(gravatarEmail).toString();
-    this.setState({ imgGravatar: hash });
-  };
-
-  savePlayer = () => {
-    const { imgGravatar } = this.state;
-    const { name, score } = this.props;
-    const newPlayer = { name, score, imgGravatar };
-    if (!JSON.parse(localStorage.getItem('players'))) {
-      this.setState(
-        (prev) => (
-          { playersArray: [...prev.playersArray, newPlayer] }),
-        () => {
-          const { playersArray } = this.state;
-          localStorage.setItem('players', JSON.stringify(playersArray));
-        },
-      );
-    } else {
-      const players = JSON.parse(localStorage.getItem('players'));
-      this.setState(
-        { playersArray: [...players, newPlayer] },
-        () => {
-          const { playersArray } = this.state;
-          localStorage.setItem('players', JSON.stringify(playersArray));
-        },
-      );
-    }
+  getInfo = () => {
+    const playersArray = JSON.parse(localStorage.getItem('players'));
+    this.setState({ playersArray });
   };
 
   handleClick = () => {
@@ -55,28 +31,44 @@ class Ranking extends React.Component {
   render() {
     const { playersArray } = this.state;
     const orderArray = playersArray.sort((a, b) => b.score - a.score);
+    const FOUR = 4;
     return (
-      <div>
-        <title data-testid="ranking-title"> Ranking </title>
-        <h1>Ranking</h1>
-        <ol>
-          { orderArray.length > 0
-            ? orderArray.map((player, index) => (
-              <li key={ index }>
-                <img src={ `https://www.gravatar.com/avatar/${player.imgGravatar}` } alt="avatarImage" />
-                <h3 data-testid={ `player-name-${index}` }>{ player.name }</h3>
-                <h3 data-testid={ `player-score-${index}` }>{ player.score }</h3>
-              </li>
-            ))
-            : null}
-        </ol>
-        <button
-          data-testid="btn-go-home"
-          onClick={ this.handleClick }
-          type="button"
-        >
-          Play Again!
-        </button>
+      <div className="ranking gradient">
+        <Icon data="icon-ranking" />
+        <div className="ranking-score">
+          <h1 className="ranking-title" data-testid="ranking-title">Ranking</h1>
+          <div className="full-scores">
+            { orderArray.length > 0
+              ? orderArray.slice(0, FOUR).map((player, index) => (
+                <div className="player-score-ranking" key={ index }>
+                  <img className="ranking-player-image" src={ `https://www.gravatar.com/avatar/${player.imgGravatar}` } alt="avatarImage" />
+                  <h3
+                    className="ranking-player-name"
+                    data-testid={ `player-name-${index}` }
+                  >
+                    { player.name }
+                  </h3>
+                  <div
+                    className="player-score-value"
+                  >
+                    <FontAwesomeIcon className="star" icon={ solid('star') } />
+                    <h3 data-testid={ `player-score-${index}` }>
+                      { `${player.score} pontos`}
+                    </h3>
+                  </div>
+                </div>
+              ))
+              : null}
+          </div>
+          <button
+            data-testid="btn-go-home"
+            onClick={ this.handleClick }
+            type="button"
+            className="ranking-play-button"
+          >
+            Play Again!
+          </button>
+        </div>
       </div>
     );
   }

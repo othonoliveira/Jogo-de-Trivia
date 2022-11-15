@@ -6,6 +6,8 @@ export const SAVE_POINTS = 'SAVE_POINTS';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SAVE_CATEGORIES = 'SAVE_CATEGORIES';
 export const CLEAR_SCORE = 'CLEAR_SCORE';
+export const GAME_OVER = 'GAME_OVER';
+export const START_GAME = 'START_GAME';
 
 // action creator
 export const savePlayer = (payload) => ({
@@ -42,3 +44,11 @@ export function getCategories() {
     }
   };
 }
+
+export const gameOver = () => ({
+  type: GAME_OVER,
+});
+
+export const startGame = () => ({
+  type: START_GAME,
+});

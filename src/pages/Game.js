@@ -24,7 +24,8 @@ class Game extends React.Component {
   }
 
   async componentDidMount() {
-    const { history, settings } = this.props;
+    const { history, settings, game } = this.props;
+    if (game) history.push('/');
     const FIVE = 5;
 
     const QUANTITY = 5;
@@ -126,7 +127,10 @@ class Game extends React.Component {
                     className="current-question"
                     data-testid="question-text"
                   >
-                    { q.question }
+                    { q.question.replaceAll('&#039;', "'")
+                      .replaceAll('&quot;', '"').replaceAll('&uuml;', 'ü')
+                      .replaceAll('&eacute;', 'é')
+                      .replaceAll('&ecirc;', 'ê') }
                   </p>
                   <div className="timer">
                     <FontAwesomeIcon
@@ -175,6 +179,7 @@ const mapStateToProps = (globalState) => ({
   prevScore: globalState.player.score,
   settings: globalState.settings,
   assertions: globalState.player.assertions,
+  game: globalState.player.game,
 });
 
 Game.propTypes = {
@@ -183,6 +188,7 @@ Game.propTypes = {
   settings: PropTypes.instanceOf(Object).isRequired,
   prevScore: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  game: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(Game);
