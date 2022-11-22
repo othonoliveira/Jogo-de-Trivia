@@ -2,6 +2,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { decode } from 'html-entities';
 import { connect } from 'react-redux';
 import Header from '../component/Header';
 import Options from '../component/Options';
@@ -127,10 +128,7 @@ class Game extends React.Component {
                     className="current-question"
                     data-testid="question-text"
                   >
-                    { q.question.replaceAll('&#039;', '’')
-                      .replaceAll('&quot;', '"').replaceAll('&uuml;', 'ü')
-                      .replaceAll('&eacute;', 'é')
-                      .replaceAll('&ecirc;', 'ê') }
+                    { decode(q.question) }
                   </p>
                   <div className="timer">
                     <FontAwesomeIcon
