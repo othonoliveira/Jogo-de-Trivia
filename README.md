@@ -1,13 +1,22 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Jogo de Trivia
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+<img src="./public/Untitled ‑ Made with FlexClip.gif" alt="exemplo imagem">
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+> Jogo de perguntas e respostas, desenvolvido em Javascript utilizando React.js, CSS, Bootstrap e Redux.
+
+### Ajustes e melhorias
+
+Embora o projeto esteja completo, ainda pretendo implementar melhorias, as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [ ] Desenvolver um sistema de save
+- [ ] Melhorar estilização
+- [ ] Sistema de login
+- [ ] Questões em multiplos idiomas
+
+## 💻 Como Jogar?
+
+Basta utilizar esse link e sera redirecionado para a página do jogo:
+<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
+* https://trivia-game-othonoliveira.vercel.app/
+<!-- * Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível. -->
+<!-- * Você leu `<guia / link / documentação_relacionada_ao_projeto>`. -->
